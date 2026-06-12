@@ -24,16 +24,81 @@
           id="todo-input"
           name="todo"
           type="text"
-          maxlength="120"
           placeholder="接下来要做什么？"
           autocomplete="off"
           required
+        >
+        <label class="sr-only" for="due-date-input">选择截止日期</label>
+        <input
+          class="due-date-input"
+          id="due-date-input"
+          name="dueDate"
+          type="date"
+          aria-label="截止日期"
         >
         <button type="submit" class="add-button" aria-label="添加待办事项">
           <span aria-hidden="true">+</span>
           添加
         </button>
       </form>
+
+      <div class="keyword-search">
+        <label class="sr-only" for="keyword-search-input">搜索待办事项</label>
+        <input
+          id="keyword-search-input"
+          type="search"
+          placeholder="搜索待办关键词"
+          autocomplete="off"
+        >
+      </div>
+
+      <div class="filter-tabs" id="todo-filters" role="group" aria-label="筛选待办事项">
+        <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">
+          全部
+        </button>
+        <button class="filter-button" type="button" data-filter="completed" aria-pressed="false">
+          已完成
+        </button>
+        <button class="filter-button" type="button" data-filter="active" aria-pressed="false">
+          未完成
+        </button>
+      </div>
+
+      <div class="date-search">
+        <label for="date-filter-input">按截止日期查询</label>
+        <input id="date-filter-input" type="date">
+        <button id="clear-date-filter" type="button">清除</button>
+      </div>
+
+      <section class="statistics" aria-labelledby="statistics-title">
+        <div class="statistics-header">
+          <h2 id="statistics-title">事项统计</h2>
+          <div class="statistics-tabs" id="statistics-filters" role="group" aria-label="统计时间范围">
+            <button class="statistics-filter active" type="button" data-range="all" aria-pressed="true">全部</button>
+            <button class="statistics-filter" type="button" data-range="day" aria-pressed="false">本日</button>
+            <button class="statistics-filter" type="button" data-range="week" aria-pressed="false">本周</button>
+            <button class="statistics-filter" type="button" data-range="month" aria-pressed="false">本月</button>
+          </div>
+        </div>
+        <div class="statistics-grid">
+          <div class="stat-item">
+            <span class="stat-value" id="stat-total">0</span>
+            <span class="stat-label">总数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="stat-completed">0</span>
+            <span class="stat-label">已完成</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="stat-active">0</span>
+            <span class="stat-label">未完成</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="stat-overdue">0</span>
+            <span class="stat-label">已过期</span>
+          </div>
+        </div>
+      </section>
 
       <div class="list-toolbar">
         <p id="todo-summary">暂无待办</p>
@@ -46,19 +111,24 @@
 
       <div class="empty-state" id="empty-state">
         <div class="empty-icon" aria-hidden="true">✓</div>
-        <h2>清单空空如也</h2>
-        <p>添加一件小事，开始今天的进度。</p>
+        <h2 id="empty-title">清单空空如也</h2>
+        <p id="empty-message">添加一件小事，开始今天的进度。</p>
       </div>
     </section>
   </main>
 
   <template id="todo-template">
     <li class="todo-item">
-      <label class="todo-content">
-        <input class="todo-checkbox" type="checkbox">
-        <span class="custom-checkbox" aria-hidden="true"></span>
-        <span class="todo-text"></span>
-      </label>
+      <div class="todo-content">
+        <label class="todo-toggle">
+          <input class="todo-checkbox" type="checkbox">
+          <span class="custom-checkbox" aria-hidden="true"></span>
+        </label>
+        <div class="todo-main">
+          <span class="todo-text"></span>
+          <span class="todo-due-date"></span>
+        </div>
+      </div>
       <button class="delete-button" type="button" aria-label="删除待办事项">
         <span aria-hidden="true">×</span>
       </button>

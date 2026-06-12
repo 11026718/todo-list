@@ -251,6 +251,8 @@ h1 {
 }
 
 .todo-text {
+  min-width: 0;
+  flex: 1;
   overflow-wrap: anywhere;
   line-height: 1.5;
   transition: color 160ms ease;

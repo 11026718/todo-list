@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="一个简洁、支持本地保存的待办事项应用">
+  <title>今日待办</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="todo-card" aria-labelledby="page-title">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">保持专注，逐项完成</p>
+          <h1 id="page-title">今日待办</h1>
+        </div>
+        <div class="date-badge" id="date-badge" aria-label="今天的日期"></div>
+      </header>
+
+      <form class="todo-form" id="todo-form">
+        <label class="sr-only" for="todo-input">添加新的待办事项</label>
+        <input
+          id="todo-input"
+          name="todo"
+          type="text"
+          maxlength="120"
+          placeholder="接下来要做什么？"
+          autocomplete="off"
+          required
+        >
+        <button type="submit" class="add-button" aria-label="添加待办事项">
+          <span aria-hidden="true">+</span>
+          添加
+        </button>
+      </form>
+
+      <div class="list-toolbar">
+        <p id="todo-summary">暂无待办</p>
+        <button class="clear-button" id="clear-completed" type="button">
+          清除已完成
+        </button>
+      </div>
+
+      <ul class="todo-list" id="todo-list" aria-live="polite"></ul>
+
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon" aria-hidden="true">✓</div>
+        <h2>清单空空如也</h2>
+        <p>添加一件小事，开始今天的进度。</p>
+      </div>
+    </section>
+  </main>
+
+  <template id="todo-template">
+    <li class="todo-item">
+      <label class="todo-content">
+        <input class="todo-checkbox" type="checkbox">
+        <span class="custom-checkbox" aria-hidden="true"></span>
+        <span class="todo-text"></span>
+      </label>
+      <button class="delete-button" type="button" aria-label="删除待办事项">
+        <span aria-hidden="true">×</span>
+      </button>
+    </li>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
